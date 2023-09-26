@@ -4,6 +4,3 @@ show_downloads: true
 plugins:
   - jekyll-remote-theme
 remote_theme: sblisesivdin/biscuit
-include:
-  - README.md
-  - favicon.png
