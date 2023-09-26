@@ -1,3 +1,5 @@
+<center><img src="/favicon.png"></center>
+
 **pip.wtf: Inline dependencies for small Python scripts.**
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./pip_wtf.py&lines=3-11) -->
@@ -26,7 +28,7 @@ Pipx? Not for scripts. Poetry? "Oh, poor baby, did you forget your pyproject.tom
 That's **pip_wtf**: a single function you copy to the top of your Python
 script. It needs pip and that's it. You call it just once instead of running
 `pip install`, then do your imports, and then you've got a script that works on
-every Python version since 2.7., vanilla, as long as pip is around.
+every Python version since 2.7 (as long as pip is around).
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./pip_wtf.py) -->
 <!-- The below code snippet is automatically added from ./pip_wtf.py -->

@@ -1,6 +1,9 @@
 title: pip.wtf
 description: Inline pip dependencies for small Python scripts.
 show_downloads: true
+remote_theme: sblisesivdin/biscuit
+plugins:
+  - jekyll-remote-theme
 include:
   - README.md
   - favicon.png
