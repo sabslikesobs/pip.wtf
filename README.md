@@ -48,8 +48,11 @@ def pip_wtf(command):
 # You gotta shell-escape your requirements if they would break on the terminal.
 # If you're on Windows, remember Windows needs double-quotes, not single.
 pip_wtf('beautifulsoup4 "requests>=1.0" pyyaml==5.3.1')
-# You can add anything else you want to the pip install command.
+# You can add anything else you want to the pip install command
+# to help add special flags for difficult situations.
 pip_wtf('--index-url https://pypi.python.org/simple/ beautifulsoup4 "requests>=1.0" pyyaml')
+# You can keep retrying it until it works, if you really want to.
+pip_wtf('beautifulsoup4==4.0.1 requests==2.4.0 pyyaml==3.11')
 
 import requests
 import yaml
