@@ -1,0 +1,76 @@
+name: pipwtf
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+jobs:        
+
+  test-setup-py:
+    strategy:
+      fail-fast: false
+      matrix:
+        plat: ["ubuntu-latest", "windows-latest", "macos-latest", "windows-2019", "macos-11"]
+        python: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
+        exclude:
+          - plat: ubuntu-latest
+            python: 3.6
+    runs-on: ${{matrix.plat}}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{matrix.python}}
+    - run: python ./pip_wtf.py
+    
+  test-d-ubuntu:
+    strategy:
+      fail-fast: false
+      matrix:
+        # https://hub.docker.com/_/ubuntu
+        version: ["14.04", "16.04", "18.04", "20.04", "22.04"]
+    runs-on: ubuntu-latest
+    container: ubuntu:${{matrix.version}}
+    steps:
+      - uses: actions/checkout@v1
+      - run: apt-get update; apt-get install -y python3-pip; python ./pip_wtf.py
+
+  test-d-py-buster:
+    strategy:
+      fail-fast: false
+      matrix:
+        # https://hub.docker.com/_/python
+        python: ["2.7", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
+    runs-on: ubuntu-latest
+    container: python:${{matrix.python}}-slim-buster
+    steps:
+      - uses: actions/checkout@v2
+      - run: python ./pip_wtf.py
+
+  test-d-py-alpine:
+    strategy:
+      fail-fast: false
+      matrix:
+        # https://hub.docker.com/_/python
+        python: ["2.7", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
+    runs-on: ubuntu-latest
+    container: python:${{matrix.python}}-alpine
+    steps:
+      - uses: actions/checkout@v1
+      - run: python ./pip_wtf.py
+
+  auto-update-readme:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v2
+      - name: Markdown autodocs
+        uses: dineshsonachalam/markdown-autodocs@v1.0.4
+      - name: Create raw
+        run: sed -n '3,11p' pip_wtf.py > raw
+      - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
+        with:
+          add: 'raw'
