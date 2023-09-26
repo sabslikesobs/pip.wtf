@@ -36,7 +36,7 @@ jobs:
     container: ubuntu:${{matrix.version}}
     steps:
       - uses: actions/checkout@v1
-      - run: apt-get update; apt-get install -y python3-pip; python ./pip_wtf.py
+      - run: apt-get update; apt-get install -y python3-pip; python3 ./pip_wtf.py
 
   test-d-py-buster:
     strategy:
