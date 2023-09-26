@@ -1,0 +1,6 @@
+title: pip.wtf
+description: Inline pip dependencies for small Python scripts.
+show_downloads: true
+include:
+  - README.md
+  - favicon.png
