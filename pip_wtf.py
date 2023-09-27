@@ -16,7 +16,7 @@ pip_wtf('beautifulsoup4 "requests>=1.0" pyyaml==5.3.1')
 # You can add anything else you want to the pip install command to help add
 # special flags for difficult situations. You can keep retrying it until it
 # works, if you really want to.
-pip_wtf('--index-url https://pypi.python.org/simple/ beautifulsoup4==4.2.1 requests==2.31.0 pyyaml==3.10 urllib3==2.0.5')
+pip_wtf('--index-url https://pypi.python.org/simple/ beautifulsoup4==4.2.1 requests==2.13.0 pyyaml==3.10 urllib3==2.0.5')
 
 import requests
 import yaml
