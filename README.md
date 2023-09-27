@@ -51,11 +51,15 @@ if sys.version_info >= (3, 5):
     # If you're on Windows, remember Windows needs double-quotes, not single.
     pip_wtf('beautifulsoup4 "requests>=1.0" pyyaml==5.3.1')
 
-else:
+elif sys.version_info >= (3, 0):
     # You can add anything else you want to the pip install command to help add
-    # special flags for difficult situations. You can keep retrying it until it
-    # works, if you really want to.
+    # special flags for difficult situations, like when the Pip version is too old
+    # to support automatic https URLs...
     pip_wtf('--index-url https://pypi.python.org/simple/ beautifulsoup4==4.2.1 requests==2.13.0 pyyaml==3.10 urllib3==2.0.5')
+
+else:
+    # It even works with Python 2.7 (kinda tough to find an environment with that these days).
+    pip_wtf('beautifulsoup4 requests pyyaml')
 
 import requests
 import yaml
