@@ -45,6 +45,7 @@ def pip_wtf(command):
     if os.path.exists(t): return
     os.system(" ".join([sys.executable, "-m", "pip", "install", "-t", t, command]))
 
+import sys
 if sys.version_info >= (3, 5):
     # You gotta shell-escape your requirements if they would break on the terminal.
     # If you're on Windows, remember Windows needs double-quotes, not single.
