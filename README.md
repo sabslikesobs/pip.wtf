@@ -45,13 +45,16 @@ def pip_wtf(command):
     if os.path.exists(t): return
     os.system(" ".join([sys.executable, "-m", "pip", "install", "-t", t, command]))
 
-# You gotta shell-escape your requirements if they would break on the terminal.
-# If you're on Windows, remember Windows needs double-quotes, not single.
-pip_wtf('beautifulsoup4 "requests>=1.0" pyyaml==5.3.1')
-# You can add anything else you want to the pip install command to help add
-# special flags for difficult situations. You can keep retrying it until it
-# works, if you really want to.
-pip_wtf('--index-url https://pypi.python.org/simple/ beautifulsoup4==4.2.1 requests==2.13.0 pyyaml==3.10 urllib3==2.0.5')
+if sys.version_info >= (3, 5):
+    # You gotta shell-escape your requirements if they would break on the terminal.
+    # If you're on Windows, remember Windows needs double-quotes, not single.
+    pip_wtf('beautifulsoup4 "requests>=1.0" pyyaml==5.3.1')
+
+else:
+    # You can add anything else you want to the pip install command to help add
+    # special flags for difficult situations. You can keep retrying it until it
+    # works, if you really want to.
+    pip_wtf('--index-url https://pypi.python.org/simple/ beautifulsoup4==4.2.1 requests==2.13.0 pyyaml==3.10 urllib3==2.0.5')
 
 import requests
 import yaml
