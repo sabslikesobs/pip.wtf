@@ -1,6 +1,5 @@
 title: pip.wtf
 description: Inline pip dependencies for small Python scripts.
-show_downloads: true
 plugins:
   - jekyll-coffeescript
   - jekyll-default-layout
