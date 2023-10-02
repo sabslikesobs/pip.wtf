@@ -51,10 +51,6 @@ def pip_wtf(command):
     if os.path.exists(t): return
     os.system(" ".join([sys.executable, "-m", "pip", "install", "-t", t, command]))
 
-# Now you just run pip_wtf('the stuff you would put into pip install').
-# This single script runs in all the environments I've set up for it on GitHub Actions,
-# so I'm using sys.version_info to change the dependencies depending on the Python version.
-
 import sys
 if sys.version_info >= (3, 5):
     # You gotta shell-escape your requirements if they would break on the terminal.
@@ -68,8 +64,7 @@ elif sys.version_info >= (3, 0):
     pip_wtf('--index-url https://pypi.python.org/simple/ beautifulsoup4==4.2.1 requests==2.13.0 pyyaml==3.10 urllib3==2.0.5')
 
 else:
-    # It even works with Python 2.7 (altohugh it's kinda tough to find an
-    # environment with that these days).
+    # It even works with Python 2.7 (kinda tough to find an environment with that these days).
     pip_wtf('beautifulsoup4 requests pyyaml')
 
 import requests
