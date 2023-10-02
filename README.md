@@ -23,12 +23,18 @@ def pip_wtf(command):
 
 I've had it. I just wanted to write a single-file Python script with one measly little external import. But the Python dependency management cabal just won't stop treating me like I'm an idiot.
 
-Pipx? Not for scripts. Poetry? "Oh, poor baby, did you forget your pyproject.toml?" Pip-run? Tired of fighting with persistence. Pip by itself with a little -U? [I've gotta give them an extra flag to show I know how to wipe my own ass!](https://peps.python.org/pep-0668/) Well, Python, you've done it. I'm pissed. I'm giving up on you...r suite of god-awful, overbearing package managers and I'm going to do it myself, in my script, with no virtual environments, no pip wrappers, and no god damn TOML!
+Pipx? Not for scripts. Poetry? "Oh, poor baby, did you forget your pyproject.toml?" Pip-run? Tired of fighting with persistence. Pip by itself with a little -U? [I've gotta give them an extra flag to show I know how to wipe my own ass!](https://peps.python.org/pep-0668/) What about [baking it in to pip?](https://peps.python.org/pep-0722/) If the [rabble can ever settle](https://discuss.python.org/t/pep-722-dependency-specification-for-single-file-scripts/29905) on anything, [even more-fucking-TOML](https://peps.python.org/pep-0723), it'll only work with a version of pip that's definitely not gonna be around on my ancient Debian VPS!
 
-That's **pip_wtf**: a single function you copy to the top of your Python
+Well, Python, you've done it. I'm pissed. I'm giving up on you...r suite of
+god-awful, overbearing package managers and I'm going to do it myself, in my
+script, with no virtual environments, no pip wrappers, and no god damn
+TOML!
+
+That's **`pip_wtf`**: a single function you copy to the top of your Python
 script. It needs pip and that's it. You call it just once instead of running
 `pip install`, then do your imports, and then you've got a script that works on
-every Python version since 2.7 (as long as pip is around).
+pretty much every platform and pretty much every Python version since 2.7 (as
+long as pip is around).
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./pip_wtf.py) -->
 <!-- The below code snippet is automatically added from ./pip_wtf.py -->
@@ -45,6 +51,10 @@ def pip_wtf(command):
     if os.path.exists(t): return
     os.system(" ".join([sys.executable, "-m", "pip", "install", "-t", t, command]))
 
+# Now you just run pip_wtf('the stuff you would put into pip install').
+# This single script runs in all the environments I've set up for it on GitHub Actions,
+# so I'm using sys.version_info to change the dependencies depending on the Python version.
+
 import sys
 if sys.version_info >= (3, 5):
     # You gotta shell-escape your requirements if they would break on the terminal.
@@ -58,7 +68,8 @@ elif sys.version_info >= (3, 0):
     pip_wtf('--index-url https://pypi.python.org/simple/ beautifulsoup4==4.2.1 requests==2.13.0 pyyaml==3.10 urllib3==2.0.5')
 
 else:
-    # It even works with Python 2.7 (kinda tough to find an environment with that these days).
+    # It even works with Python 2.7 (altohugh it's kinda tough to find an
+    # environment with that these days).
     pip_wtf('beautifulsoup4 requests pyyaml')
 
 import requests
@@ -80,8 +91,8 @@ How's it work? Well, for `/home/adder/bin/bite.py`:
 **You're totally in charge of the new directory and the pip_wtf behavior.**
 
 - New dependency? You need to `rm -rf` it first.
-- Prefer to upgrade packages instead? Dump the early return.
-- Need to support site-packages too? Change that list comprehension.
+- Prefer to upgrade packages instead? Comment out the early `return`.
+- Need to support site-packages or dist-packages too? Change that list comprehension.
 - Want to share dependencies across your seventeen pytorch scripts? Lose the early return and change `t` so it's one `.pip_wtf/` for your whole script directory, or import it, or something.
 
 Finally. Python dependencies that follow your orders instead of the other way around.
