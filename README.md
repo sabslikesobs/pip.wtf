@@ -98,6 +98,6 @@ How's it work? Well, for `/home/adder/bin/bite.py`:
 - New dependency? You need to `rm -rf` it first.
 - Prefer to upgrade packages instead? Comment out the early `return`.
 - Need to support site-packages or dist-packages too? Change that list comprehension.
-- Want to share dependencies across your seventeen pytorch scripts? Lose the early return and change `t` so it's one `.pip_wtf/` for your whole script directory, or import it, or something.
+- Want to share dependencies across your seventeen pytorch scripts? Lose the early return and change `t` so it's one `.pip_wtf/` for your whole script directory, or import it, or something. Do what you want, dude! It's all right there!
 
 Finally. Python dependencies that follow your orders instead of the other way around.
