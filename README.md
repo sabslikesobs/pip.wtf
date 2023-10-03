@@ -61,6 +61,10 @@ def pip_wtf(command):
     if os.path.exists(t): return
     os.system(" ".join([sys.executable, "-m", "pip", "install", "-t", t, command]))
 
+# Now you just call it to install your packages:
+#   pip_wtf('the rest of the pip install command here')
+# Here are some examples for different platforms:
+
 import sys
 if sys.version_info >= (3, 5):
     # You gotta shell-escape your requirements if they would break on the terminal.
