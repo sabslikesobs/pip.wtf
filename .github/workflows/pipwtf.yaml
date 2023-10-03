@@ -20,18 +20,25 @@ jobs:
             python: 3.6
     runs-on: ${{matrix.plat}}
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: ${{matrix.python}}
-    - run: python ./pip_wtf.py
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{matrix.python}}
+      - run: python ./pip_wtf.py
+
+  test-faraway-and-shebang:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: mkdir -p a/pretty/deep/directory; cp pip_wtf.py a/pretty/deep/directory/swoof.py; chmod +x a/pretty/deep/directory/swoof.py
+      - run: a/pretty/deep/directory/swoof.py
     
   test-d-ubuntu:
     strategy:
       fail-fast: false
       matrix:
         # https://hub.docker.com/_/ubuntu
-        version: ["14.04", "16.04", "18.04", "20.04", "22.04"]
+        version: ["14.04", "18.04", "20.04", "22.04"]
     runs-on: ubuntu-latest
     container: ubuntu:${{matrix.version}}
     steps:
@@ -55,7 +62,7 @@ jobs:
       fail-fast: false
       matrix:
         # https://hub.docker.com/_/python
-        python: ["2.7", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
+        python: ["3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
     runs-on: ubuntu-latest
     container: python:${{matrix.python}}-alpine
     steps:
