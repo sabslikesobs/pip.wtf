@@ -21,9 +21,19 @@ def pip_wtf(command):
 
 * * *
 
-I've had it. I just wanted to write a single-file Python script with one measly little external import. But the Python dependency management cabal just won't stop treating me like I'm an idiot.
+I've had it. I just wanted to write a single-file Python script with one measly
+little external import. But the Python dependency management cabal just won't
+stop treating me like I'm an idiot.
 
-Pipx? Not for scripts. Poetry? "Oh, poor baby, did you forget your pyproject.toml?" Pip-run? Tired of fighting with persistence. Pip by itself with a little -U? [I've gotta give them an extra flag to show I know how to wipe my own ass!](https://peps.python.org/pep-0668/) What about [baking it in to pip?](https://peps.python.org/pep-0722/) If the [rabble can ever settle](https://discuss.python.org/t/pep-722-dependency-specification-for-single-file-scripts/29905) on anything, [even more TOML](https://peps.python.org/pep-0723), it'll only work with a version of pip that's definitely not gonna be around on my ancient Debian VPS!
+Pipx? Not for scripts. Poetry? "Oh, poor baby, did you forget your
+pyproject.toml?" Pip-run? Tired of fighting with persistence. Pip by itself
+with a little -U? [I've gotta give them an extra flag to show I know how to
+wipe my own ass!](https://peps.python.org/pep-0668/) What about [baking it in
+to pip?](https://peps.python.org/pep-0722/) If the [rabble can ever
+settle](https://discuss.python.org/t/pep-722-dependency-specification-for-single-file-scripts/29905)
+on anything, [even more TOML](https://peps.python.org/pep-0723), it'll only
+work with a version of pip that's definitely not gonna be around on my ancient
+Debian VPS!
 
 Well, Python, you've done it. I'm pissed. I'm giving up on you...r suite of
 god-awful, overbearing package managers and I'm going to do it myself, in my
@@ -31,10 +41,10 @@ script, with no virtual environments, no pip wrappers, and no god damn
 TOML!
 
 That's **`pip_wtf`**: a single function you copy to the top of your Python
-script. It needs pip and that's it. You call it just once instead of running
-`pip install`, then do your imports, and then you've got a script that works on
-pretty much every platform and pretty much every Python version since 2.7 (as
-long as pip is around).
+script. It needs pip and that's it. You call it just once, with a string
+containing the back half of a `pip install` command, then do your imports, and
+then you've got a script that works on pretty much every platform and pretty
+much every Python version since 2.7 (as long as pip is around).
 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./pip_wtf.py) -->
 <!-- The below code snippet is automatically added from ./pip_wtf.py -->
