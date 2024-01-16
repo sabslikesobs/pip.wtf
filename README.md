@@ -17,7 +17,7 @@ def pip_wtf(command):
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
-*On [GitHub](https://github.com/sabslikesobs/pip.wtf) and [pip.wtf](https://pip.wtf). Quick start: `curl -s pip.wtf/raw`*
+*On [GitHub](https://github.com/sabslikesobs/pip.wtf) and [pip.wtf](https://pip.wtf). Quick start: `curl -sL pip.wtf/raw`*
 
 * * *
 
