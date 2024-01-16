@@ -5,7 +5,7 @@ def pip_wtf(command):
     import os, os.path, sys
     t = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".pip_wtf." + os.path.basename(__file__))
     sys.path = [p for p in sys.path if "-packages" not in p] + [t]
-    os.environ["PATH"] += os.pathsep + t + os.path.sep + "bin"
+    os.environ["PATH"] = t + os.path.sep + "bin" + os.pathsep + os.environ["PATH"]
     os.environ["PYTHONPATH"] = os.pathsep.join(sys.path)
     if os.path.exists(t): return
     os.system(" ".join([sys.executable, "-m", "pip", "install", "-t", t, command]))
