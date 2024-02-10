@@ -2,19 +2,19 @@
 
 # https://pip.wtf
 def pip_wtf(command):
-    import os, os.path, sys
+    import os, os.path, sys  # noqa: E401
     t = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".pip_wtf." + os.path.basename(__file__))
     sys.path = [p for p in sys.path if "-packages" not in p] + [t]
     os.environ["PATH"] = t + os.path.sep + "bin" + os.pathsep + os.environ["PATH"]
     os.environ["PYTHONPATH"] = os.pathsep.join(sys.path)
-    if os.path.exists(t): return
+    if os.path.exists(t): return  # noqa: E701
     os.system(" ".join([sys.executable, "-m", "pip", "install", "-t", t, command]))
 
 # Now you just call it to install your packages:
 #   pip_wtf('the rest of the pip install command here')
 # Here are some examples for different platforms:
 
-import sys
+import sys  # noqa: E402
 if sys.version_info >= (3, 5):
     # You gotta shell-escape your requirements if they would break on the terminal.
     # If you're on Windows, remember Windows needs double-quotes, not single.
@@ -30,8 +30,8 @@ else:
     # It even works with Python 2.7 (kinda tough to find an environment with that these days).
     pip_wtf('beautifulsoup4 requests pyyaml')
 
-import requests
-import yaml
-from bs4 import BeautifulSoup
+import requests  # noqa: E402
+import yaml  # noqa: E402
+from bs4 import BeautifulSoup  # noqa: E402
 soup = BeautifulSoup(requests.get("https://pypi.org").content, "html.parser")
 print(yaml.dump({"header": soup.find("h1").get_text()}))
